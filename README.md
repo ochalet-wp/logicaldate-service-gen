@@ -24,11 +24,12 @@ See the following links for guides on the available generators:
 
 ## Generate Spring Kafka Client
 
-Install the asyncapi generator and template:
+Install the asyncapi generator and templates:
 
 ```
 npm install -g @asyncapi/generator
 npm install -g @asyncapi/java-spring-template 
+npm install -g @asyncapi/html-template
 ```
 
 Generate the Kafka client code to publish an event.
