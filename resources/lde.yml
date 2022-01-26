@@ -1,0 +1,15 @@
+components:
+  schemas:
+    lde:
+      type: object
+      properties:
+        logical_date:
+          type: string
+          format: date
+        creation_date:
+          type: string
+          format: date-time
+        application:
+          type: string
+        processing_group:
+          type: string

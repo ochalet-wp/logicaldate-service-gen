@@ -1,0 +1,68 @@
+openapi: 3.0.1
+info:
+  title: Logical Date Service
+  description: 'Service to allow setting and retrieval of the logical date for a processing group & application'
+  version: 0.0.1
+servers:
+  - url: http://localhost:8081/v1/lds
+paths:
+  /{application}/{processinggroup}/incrementDate:
+    post:
+      tags:
+        - logical date
+      summary: Update the logial date for a application & processing group
+      operationId: updateLogicalDate
+      parameters:
+        - name: application
+          in: path
+          description: application id
+          required: true
+          schema:
+            type: string
+        - name: processinggroup
+          in: path
+          description: processing group id
+          required: true
+          schema:
+            type: string
+      responses:
+        405:
+          description: Validation exception
+          content: {}
+  /{application}/{processinggroup}:
+    get:
+      tags:
+        - logical date
+      summary: Get logical date
+      description: Get logical date for application and processing group
+      operationId: findLogicalDateByApplicationAndProcessingGroup
+      parameters:
+        - name: application
+          in: path
+          description: application id
+          required: true
+          schema:
+            type: string
+        - name: processinggroup
+          in: path
+          description: processing group id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './lde.yml#/components/schemas/lde'
+        400:
+          description: Invalid ID supplied
+          content: {}
+        404:
+          description: Application & Processing Group not found
+          content: {}
+
+
