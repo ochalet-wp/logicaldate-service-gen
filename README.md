@@ -11,7 +11,7 @@ npm install @openapitools/openapi-generator-cli -g
 
 Generate Spring sever code using the Spring generator:
 ```
-openapi-generator-cli generate -i openapi.yml -o ./openapi/src -g spring
+openapi-generator-cli generate -i ./resources/openapi.yml -o ./openapi/src -g spring
 ```
 
 See the following links for guides on the available generators:
@@ -24,17 +24,18 @@ See the following links for guides on the available generators:
 
 ## Generate Spring Kafka Client
 
-Install the asyncapi generator:
+Install the asyncapi generator and template:
 
 ```
 npm install -g @asyncapi/generator
+npm install -g @asyncapi/java-spring-template 
 ```
 
 Generate the Kafka client code to publish an event.
 Note we use inverseOpertations so the publish definition in the spec creates a publisher rather than a subscriber method.
 
 ```
-npm install -g @asyncapi/java-spring-template -p inverseOperations=true -o ./asyncapi/src
+ag ./resources/asyncapi.yaml @asyncapi/java-spring-template -p inverseOperations=true -o ./asyncapi/src
 ```
 
 [AsyncAPI Spring Template Guide](https://github.com/asyncapi/java-spring-template)
