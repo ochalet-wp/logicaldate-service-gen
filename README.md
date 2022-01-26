@@ -46,7 +46,7 @@ You can use either the OpenAPI or AsyncAPI generators to generate documentation.
 In this example we'll use the AsyncAPI HTML template:
 
 ```
-ag asyncapi.yaml @asyncapi/html-template -o ./docs
+ag ./resources/asyncapi.yaml @asyncapi/html-template -o ./docs
 ```
 We can then publish this generated HTML to GitHub Pages, see example [here](https://github.devops.worldpay.local/pages/farrows520/logicaldate-service-gen/) for this repo. 
 
