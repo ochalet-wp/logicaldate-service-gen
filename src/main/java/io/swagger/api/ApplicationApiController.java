@@ -50,7 +50,7 @@ public class ApplicationApiController implements ApplicationApi {
         this.request = request;
     }
 
-    public ResponseEntity<List<Lde>> findLogicalDateByApplicationAndProcessingGroup(@Parameter(in = ParameterIn.PATH, description = "application id", required=true, schema=@Schema()) @PathVariable("application") String application,@Parameter(in = ParameterIn.PATH, description = "processing group id", required=true, schema=@Schema()) @PathVariable("processinggroup") String processinggroup) {
+    public ResponseEntity<List<Lde>> findLogicalDateByApplicationAndProcessingGroup(@Parameter(in = ParameterIn.PATH, description = "application id", required=true, schema=@Schema()) @PathVariable("application") String application, @Parameter(in = ParameterIn.PATH, description = "processing group id", required=true, schema=@Schema()) @PathVariable("processinggroup") String processinggroup) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {

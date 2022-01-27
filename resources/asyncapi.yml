@@ -5,7 +5,7 @@ info:
   version: 0.0.1
 servers:
   dev:
-    url: localhost:9092
+    url: kafka:9092
     protocol: kafka
 
 defaultContentType: application/json
@@ -26,8 +26,6 @@ channels:
       message:
         $ref: '#/components/messages/lde'
 
-
-
 components:
   messages:
     lde:
@@ -38,7 +36,7 @@ components:
       traits:
         - $ref: '#/components/messageTraits/commonHeaders'
       payload:
-        $ref: "./lde.yml#/components/schemas/lde"
+        $ref: "./lde.yml#/components/schemas/msgpayload"
 
   parameters:
     application:
@@ -53,15 +51,18 @@ components:
   messageTraits:
     commonHeaders:
       headers:
+        $id: wpHeader
         type: object
         properties:
-          my-app-header:
+          WP-Content-Type:
+            type: string
+          WP-Content-Encoding:
+            type: string
+          WP-Header-Version:
             type: integer
-            minimum: 0
-            maximum: 100
 
   operationTraits:
     kafka:
       bindings:
         kafka:
-          clientId: my-app-id
+          clientId: lds

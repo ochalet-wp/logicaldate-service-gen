@@ -1,6 +1,17 @@
 components:
   schemas:
+    msgpayload:
+      $id: wpBasicLde
+      allOf:
+        - $ref: './wp-basic.yml#/components/schemas/wp-basic'
+        - type: object
+          required:
+            - payload
+          properties:
+            payload:
+              $ref: '#/components/schemas/lde'
     lde:
+      $id: lde
       type: object
       properties:
         logical_date:

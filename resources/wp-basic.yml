@@ -1,0 +1,55 @@
+components:
+  schemas:
+    meta_details:
+      $id: metaDetails
+      type: object
+      properties:
+        name:
+          type: string
+        details:
+          $id: details
+          type: object
+    origin:
+      $id: origin
+      type: object
+      properties:
+        context_name:
+          type: string
+        consequence_of:
+          $ref: '#/components/schemas/meta_details'
+    meta:
+      $id: meta
+      type: object
+      properties:
+        initiator:
+          $ref: '#/components/schemas/meta_details'
+        origin:
+          $ref: '#/components/schemas/origin'
+    wp-basic:
+      $id: wpBasic
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        category:
+          $id: category
+          type: string
+          enum:
+            - command
+            - event
+        version:
+          type: integer
+        occurred_at:
+          type: string
+          format: date-time
+        meta:
+          $ref: '#/components/schemas/meta'
+      required:
+        - id
+        - name
+        - category
+        - version
+        - occurred_at

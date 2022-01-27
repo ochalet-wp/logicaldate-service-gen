@@ -2,6 +2,7 @@ package io.swagger.service;
 
 
 import io.swagger.model.Lde;
+import io.swagger.model.WpBasicLde;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -20,7 +21,8 @@ public class PublisherService {
      * topic to publish change of logical date on
      */
     public void publishLogicalDateChanged(Integer key, Lde lde) {
-        Message<Lde> message = MessageBuilder.withPayload(lde)
+        WpBasicLde msg = new WpBasicLde(key,lde);
+        Message<WpBasicLde> message = MessageBuilder.withPayload(msg)
                 .setHeader(KafkaHeaders.TOPIC, "lds.logicalDateChanged")
                 .setHeader(KafkaHeaders.MESSAGE_KEY, key)
                 .build();
