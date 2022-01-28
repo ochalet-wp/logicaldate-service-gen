@@ -5,7 +5,7 @@
 
 You can either use the online [Swagger Editor](https://editor.swagger.io/) or the CLI.
 
-Note that when using the online editor, externally referenced scehmas will not work unless hosted somewhere.
+Note that when using the online editor, externally referenced schemas will not work unless hosted somewhere.
 Also note that after much tinkering I found that to generate the model classes the [Modelina](https://github.com/asyncapi/modelina) tool from AsyncAPI was much better; 
 see this [repo](https://github.devops.worldpay.local/farrows520/asyncapi-model-generator).
 
