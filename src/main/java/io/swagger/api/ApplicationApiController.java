@@ -95,7 +95,7 @@ public class ApplicationApiController implements ApplicationApi {
         return new ResponseEntity<List<Lde>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> updateLogicalDate(@Parameter(in = ParameterIn.PATH, description = "application id", required=true, schema=@Schema()) @PathVariable("application") String application,@Parameter(in = ParameterIn.PATH, description = "processing group id", required=true, schema=@Schema()) @PathVariable("processinggroup") String processinggroup,@Parameter(in = ParameterIn.HEADER, description = "id of this unique request" ,required=true,schema=@Schema()) @RequestHeader(value="WP-Request-ID", required=true) UUID wpRequestID,@Parameter(in = ParameterIn.HEADER, description = "content type contained in payload" ,required=true,schema=@Schema()) @RequestHeader(value="WP-Content-Type", required=true) String wpContentType,@Parameter(in = ParameterIn.HEADER, description = "encoding of content type contained in payload" ,required=true,schema=@Schema()) @RequestHeader(value="WP-Content-Encoding", required=true) String wpContentEncoding,@Parameter(in = ParameterIn.HEADER, description = "version of this header" ,required=true,schema=@Schema()) @RequestHeader(value="WP-Header-Version", required=true) Integer wpHeaderVersion) {
+    public ResponseEntity<Void> updateLogicalDate(@Parameter(in = ParameterIn.PATH, description = "application id", required=true, schema=@Schema()) @PathVariable("application") String application,@Parameter(in = ParameterIn.PATH, description = "processing group id", required=true, schema=@Schema()) @PathVariable("processinggroup") String processinggroup,@Parameter(in = ParameterIn.HEADER, description = "content type contained in payload" ,required=true,schema=@Schema()) @RequestHeader(value="WP-Content-Type", required=true) String wpContentType,@Parameter(in = ParameterIn.HEADER, description = "encoding of content type contained in payload" ,required=true,schema=@Schema()) @RequestHeader(value="WP-Content-Encoding", required=true) String wpContentEncoding,@Parameter(in = ParameterIn.HEADER, description = "version of this header" ,required=true,schema=@Schema()) @RequestHeader(value="WP-Header-Version", required=true) Integer wpHeaderVersion) {
         String accept = request.getHeader("Accept");
 
         Lde lde = inMemoryLdeCache.getLde(application,processinggroup);
@@ -111,7 +111,9 @@ public class ApplicationApiController implements ApplicationApi {
             inMemoryLdeCache.putLde(application,processinggroup,lde);
         }
 
-        publisherService.publishLogicalDateChanged(new Random().nextInt(),lde,wpRequestID);
+        UUID uuid = UUID.randomUUID();
+        log.info("receievd request id {}",uuid.toString());
+        publisherService.publishLogicalDateChanged(new Random().nextInt(),lde,uuid);
 
         return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }

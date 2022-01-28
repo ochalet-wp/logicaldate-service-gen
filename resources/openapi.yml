@@ -26,13 +26,6 @@ paths:
           schema:
             type: string
         - in: header
-          name: WP-Request-ID
-          description: id of this unique request
-          required: true
-          schema:
-            type: string
-            format: uuid
-        - in: header
           name: WP-Content-Type
           description: content type contained in payload
           required: true
