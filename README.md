@@ -3,6 +3,14 @@
 
 ## Generate Spring Server
 
+You can either use the online [Swagger Editor](https://editor.swagger.io/) or the CLI.
+
+Note that when using the online editor, externally referenced scehmas will not work unless hosted somewhere.
+Also note that after much tinkering I found that to generate the model classes the [Modelina](https://github.com/asyncapi/modelina) tool from AsyncAPI was much better; 
+see this [repo](https://github.devops.worldpay.local/farrows520/asyncapi-model-generator).
+
+The code in this repo was created using the Swagger Editor, Modelina and AsyncAPI for Kafka.
+
 Install the OpenAPI CLI generator:
 
 ```
@@ -53,7 +61,7 @@ We can then publish this generated HTML to GitHub Pages, see example [here](http
 
 # Merge
 
-The generated code bases were then merged by simply copying the Kafka client code (less of it) to the Spring OpenAPI code base.
+The generated code bases were then merged by simply copying the Kafka client code (less of it) and the Modelina output to the Spring OpenAPI code base.
 
 ## Kafka
 Remember to copy over the Spring application property for Kafka:
