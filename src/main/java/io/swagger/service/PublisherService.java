@@ -10,6 +10,8 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 
 @Service
 public class PublisherService {
@@ -20,8 +22,8 @@ public class PublisherService {
     /**
      * topic to publish change of logical date on
      */
-    public void publishLogicalDateChanged(Integer key, Lde lde) {
-        WpBasicLde msg = new WpBasicLde(key,lde);
+    public void publishLogicalDateChanged(Integer key, Lde lde, UUID requestId) {
+        WpBasicLde msg = new WpBasicLde(key,lde,requestId);
         Message<WpBasicLde> message = MessageBuilder.withPayload(msg)
                 .setHeader(KafkaHeaders.TOPIC, "lds.logicalDateChanged")
                 .setHeader(KafkaHeaders.MESSAGE_KEY, key)

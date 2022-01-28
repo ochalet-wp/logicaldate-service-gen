@@ -13,18 +13,43 @@ paths:
       summary: Update the logial date for a application & processing group
       operationId: updateLogicalDate
       parameters:
-        - name: application
-          in: path
+        - in: path
+          name: application
           description: application id
           required: true
           schema:
             type: string
-        - name: processinggroup
-          in: path
+        - in: path
+          name: processinggroup
           description: processing group id
           required: true
           schema:
             type: string
+        - in: header
+          name: WP-Request-ID
+          description: id of this unique request
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: header
+          name: WP-Content-Type
+          description: content type contained in payload
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: WP-Content-Encoding
+          description:  encoding of content type contained in payload
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: WP-Header-Version
+          description: version of this header
+          required: true
+          schema:
+            type: integer
       responses:
         405:
           description: Validation exception

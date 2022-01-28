@@ -1,5 +1,8 @@
 package io.swagger.model;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.threetenbp.ser.OffsetDateTimeSerializer;
@@ -17,13 +20,15 @@ public class WpBasicLde {
   private static final String EVENT_NAME = "logical_date_changed";
   private static final int EVENT_VERSION = 1;
 
-  public WpBasicLde(Integer key, Lde lde) {
+  public WpBasicLde(Integer key, Lde lde,UUID initiator) {
+
     this.setId(String.valueOf(key));
     this.setName(EVENT_NAME);
     this.setCategory(Category.EVENT);
     this.setVersion(EVENT_VERSION);
     this.setOccurredAt(OffsetDateTime.now());
     this.setPayload(lde);
+    this.setMeta(new Meta(initiator.toString()));
   }
 
   @JsonProperty("id")

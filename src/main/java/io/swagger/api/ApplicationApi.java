@@ -6,6 +6,7 @@
 package io.swagger.api;
 
 import io.swagger.model.Lde;
+import java.util.UUID;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -14,37 +15,47 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.CookieValue;
 
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.List;
+import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-01-25T14:45:15.330Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-01-28T09:46:28.971Z[GMT]")
 @Validated
 public interface ApplicationApi {
 
     @Operation(summary = "Get logical date", description = "Get logical date for application and processing group", tags={ "logical date" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Lde.class)))),
-        
-        @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
-        
-        @ApiResponse(responseCode = "404", description = "Application & Processing Group not found") })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Lde.class)))),
+
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
+
+            @ApiResponse(responseCode = "404", description = "Application & Processing Group not found") })
     @RequestMapping(value = "/{application}/{processinggroup}",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
+            produces = { "application/json" },
+            method = RequestMethod.GET)
     ResponseEntity<List<Lde>> findLogicalDateByApplicationAndProcessingGroup(@Parameter(in = ParameterIn.PATH, description = "application id", required=true, schema=@Schema()) @PathVariable("application") String application, @Parameter(in = ParameterIn.PATH, description = "processing group id", required=true, schema=@Schema()) @PathVariable("processinggroup") String processinggroup);
 
 
     @Operation(summary = "Update the logial date for a application & processing group", description = "", tags={ "logical date" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "405", description = "Validation exception") })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "405", description = "Validation exception") })
     @RequestMapping(value = "/{application}/{processinggroup}/incrementDate",
-        method = RequestMethod.POST)
-    ResponseEntity<Void> updateLogicalDate(@Parameter(in = ParameterIn.PATH, description = "application id", required=true, schema=@Schema()) @PathVariable("application") String application, @Parameter(in = ParameterIn.PATH, description = "processing group id", required=true, schema=@Schema()) @PathVariable("processinggroup") String processinggroup);
+            method = RequestMethod.POST)
+    ResponseEntity<Void> updateLogicalDate(@Parameter(in = ParameterIn.PATH, description = "application id", required=true, schema=@Schema()) @PathVariable("application") String application, @Parameter(in = ParameterIn.PATH, description = "processing group id", required=true, schema=@Schema()) @PathVariable("processinggroup") String processinggroup, @Parameter(in = ParameterIn.HEADER, description = "id of this unique request" ,required=true,schema=@Schema()) @RequestHeader(value="WP-Request-ID", required=true) UUID wpRequestID, @Parameter(in = ParameterIn.HEADER, description = "content type contained in payload" ,required=true,schema=@Schema()) @RequestHeader(value="WP-Content-Type", required=true) String wpContentType, @Parameter(in = ParameterIn.HEADER, description = "encoding of content type contained in payload" ,required=true,schema=@Schema()) @RequestHeader(value="WP-Content-Encoding", required=true) String wpContentEncoding, @Parameter(in = ParameterIn.HEADER, description = "version of this header" ,required=true,schema=@Schema()) @RequestHeader(value="WP-Header-Version", required=true) Integer wpHeaderVersion);
 
 }
 
