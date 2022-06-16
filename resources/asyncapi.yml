@@ -18,7 +18,7 @@ channels:
         $ref: '#/components/parameters/application'
       processinggroup:
         $ref: '#/components/parameters/processinggroup'
-    publish:
+    subscribe:
       summary: Inform a logical date has changed for an application and processing group
       operationId: receiveDateChanged
       traits:
